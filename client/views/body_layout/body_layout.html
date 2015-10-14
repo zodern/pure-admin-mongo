@@ -1,0 +1,8 @@
+Mongo Body Layout test
+{{#if Template.subscriptionsReady}}
+  {{#each data}}
+    {{> jsonView json=this}}
+  {{/each}}
+{{else}}
+  Loading ...
+{{/if}}
