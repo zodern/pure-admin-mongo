@@ -1,0 +1,11 @@
+.jsonview .string {
+    color: lightGreen;
+}
+
+.jsonview .bool {
+    color: lightBlue;
+}
+
+.jsonview .num {
+    color: #9393EF;
+}

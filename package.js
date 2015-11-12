@@ -25,11 +25,16 @@ Package.onUse(function (api) {
     'client/menu_and_routing.js',
     'client/views/body_layout/body_layout.html',
     'client/views/body_layout/body_header.html',
-    'client/views/body_layout/body.js'
+    'client/views/body_layout/body.js',
+    'style.css'
   ];
 
   api.addFiles(serverFiles, 'server');
-  api.addAssets(assets, 'client');
+  if(api.addAssets) {
+    api.addAssets(assets, 'client');
+  } else {
+    api.addFiles(assets, 'client', {isAsset: true});
+  }
 });
 
 Package.onTest(function (api) {
