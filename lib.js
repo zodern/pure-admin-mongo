@@ -8,8 +8,9 @@ PureAdmin.Mongo = PAMongo.PublicAPI;
 var packagePath = "/packages/zodern_pureadmin-mongo";
 var clientPath = packagePath + "/client";
 PureAdmin.addFiles([clientPath + '/menu_and_routing.js',
-  clientPath + '/views/body.js']);
+  clientPath + '/views/views.js']);
 PureAdmin.addTemplate('mongoBodyLayout', clientPath + '/views/body_layout.html');
 PureAdmin.addTemplate('mongoHeaderLayout', clientPath + '/views/body_header.html');
+PureAdmin.addTemplate('mongoDocument', clientPath + '/views/document.html');
 
 PureAdmin.addStyleSheet(packagePath + '/style.css');

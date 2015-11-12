@@ -9,3 +9,24 @@
 .jsonview .num {
     color: #9393EF;
 }
+
+.collapse-document {
+    position: relative;
+    bottom: -20px;
+    left: -10px;
+    cursor: pointer;
+}
+
+.mongo-documents {
+    padding: 0 50px;
+}
+
+.edit-document {
+    position: relative;
+    bottom: -45px;
+    left: -50px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.19);
+    width: 35px;
+}

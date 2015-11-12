@@ -1,7 +1,7 @@
-<div class="documents">
+<div class="mongo-documents">
   {{#if Template.subscriptionsReady}}
-    {{#each data}}
-     <div class="collapse-document">-</div> {{> jsonView json=this}}
+    {{#each document in data}}
+      {{>mongoDocument document}}
     {{/each}}
   {{else}}
     Loading ...

@@ -25,7 +25,8 @@ Package.onUse(function (api) {
     'client/menu_and_routing.js',
     'client/views/body_layout.html',
     'client/views/body_header.html',
-    'client/views/body.js',
+    'client/views/views.js',
+    'client/views/document.html',
     'style.css'
   ];
 
