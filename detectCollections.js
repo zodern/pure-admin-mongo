@@ -4,7 +4,22 @@ var blackList = [
   'meteor_accounts_loginServiceConfiguration',
   '_PureAdmin-Admins',
   'meteor_autoupdate_clientVersions',
-  'users'
+  'users',
+  'velocityTestFiles',
+  'velocityFixtureFiles',
+  'velocityTestReports',
+  'velocityAggregateReports',
+  'velocityLogs',
+  'velocityMirrors',
+  'velocityOptions',
+  'MeteorToys.Impersonate',
+  'MeteorToys.JetSetter',
+  'MeteorToys.Mongol',
+  'MeteorToys.AutoPub',
+  'MeteorToys.Email',
+  'MeteorToys.Result',
+  'MeteorToys.Throttle',
+  'MeteorToys.Credentials'
 ];
 
 Meteor.startup(function () {
@@ -13,6 +28,8 @@ Meteor.startup(function () {
   names.forEach((item) => {
       if(blackList.indexOf(item.name) === -1) {
         PAMongo.collectionNames.push(item.name);
+      } else {
+        console.log('collection not added: ', item);
       }
     });
 });
