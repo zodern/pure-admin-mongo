@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/example/example/.meteor/local" />
+      <excludeFolder url="file://$MODULE_DIR$/puareadmin-mongo/example/example/.meteor/local" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
