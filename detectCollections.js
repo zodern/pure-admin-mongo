@@ -28,8 +28,6 @@ Meteor.startup(function () {
   names.forEach((item) => {
       if(blackList.indexOf(item.name) === -1) {
         PAMongo.collectionNames.push(item.name);
-      } else {
-        console.log('collection not added: ', item);
       }
     });
 });

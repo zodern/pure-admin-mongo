@@ -6,3 +6,5 @@
 .idea/pureadmin-mongo.iml
 
 puareadmin-mongo/
+
+.idea/workspace.xml
