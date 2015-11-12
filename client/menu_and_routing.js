@@ -11,7 +11,7 @@ Meteor.call('_pa.mongo.collectionNames', function(e, list) {
 PureAdmin.adminRoutes.route('/collections/:collectionName', {
   action: function (params) {
   // console.log('collectionname: ', params.collectionName);
-    BlazeLayout.render('main', {header: 'mongoBodyHeader',body: 'mongoBodyLayout'});
+    BlazeLayout.render('main', {header: 'mongoHeaderLayout',body: 'mongoBodyLayout'});
   }
 });
 

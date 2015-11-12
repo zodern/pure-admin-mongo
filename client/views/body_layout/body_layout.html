@@ -1,8 +1,9 @@
-Mongo Body Layout test
-{{#if Template.subscriptionsReady}}
-  {{#each data}}
-    {{> jsonView json=this}}
-  {{/each}}
-{{else}}
-  Loading ...
-{{/if}}
+<div class="documents">
+  {{#if Template.subscriptionsReady}}
+    {{#each data}}
+     <div class="collapse">-</div> {{> jsonView json=this}}
+    {{/each}}
+  {{else}}
+    Loading ...
+  {{/if}}
+</div>
