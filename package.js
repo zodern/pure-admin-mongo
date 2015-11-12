@@ -23,9 +23,9 @@ Package.onUse(function (api) {
   ];
   var assets = [
     'client/menu_and_routing.js',
-    'client/views/body_layout/body_layout.html',
-    'client/views/body_layout/body_header.html',
-    'client/views/body_layout/body.js',
+    'client/views/body_layout.html',
+    'client/views/body_header.html',
+    'client/views/body.js',
     'style.css'
   ];
 

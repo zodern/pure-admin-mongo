@@ -5,9 +5,11 @@ PAMongo = {
 PureAdmin.Mongo = PAMongo.PublicAPI;
 
 // add files to Pure Admin
-PureAdmin.addFiles(['/packages/zodern_pureadmin-mongo/client/menu_and_routing.js',
-  '/packages/zodern_pureadmin-mongo/client/views/body_layout/body.js']);
-PureAdmin.addTemplate('mongoBodyLayout', '/packages/zodern_pureadmin-mongo/client/views/body_layout/body_layout.html');
-PureAdmin.addTemplate('mongoHeaderLayout', '/packages/zodern_pureadmin-mongo/client/views/body_layout/body_header.html');
+var packagePath = "/packages/zodern_pureadmin-mongo";
+var clientPath = packagePath + "/client";
+PureAdmin.addFiles([clientPath + '/menu_and_routing.js',
+  clientPath + '/views/body.js']);
+PureAdmin.addTemplate('mongoBodyLayout', clientPath + '/views/body_layout.html');
+PureAdmin.addTemplate('mongoHeaderLayout', clientPath + '/views/body_header.html');
 
-PureAdmin.addStyleSheet('/packages/zodern_pureadmin-mongo/style.css');
+PureAdmin.addStyleSheet(packagePath + '/style.css');
