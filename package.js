@@ -2,7 +2,7 @@ Package.describe({
   name: 'zodern:pureadmin-mongo',
   version: '0.0.2',
   // Brief, one-line summary of the package.
-  summary: 'Manage data from MongoDb in Pure Admin',
+  summary: 'View and Edit Data from MongoDB in Pure Admin',
   // URL to the Git repository containing the source code for this package.
   git: 'https://github.com/zodern/puareadmin-mongo.git',
   // By default, Meteor will default to using README.md for documentation.
@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom('1.2.0.2');
-  api.use('zodern:pure-admin');
+  api.use('zodern:pure-admin@0.2.0');
   api.use(['ecmascript', 'check']);
   api.use('dburles:mongo-collection-instances@0.3.4');
   var serverFiles = [
