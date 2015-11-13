@@ -15,3 +15,10 @@ PureAdmin.adminRoutes.route('/collections/:collectionName', {
   }
 });
 
+PureAdmin.adminRoutes.route('/collections/:collectionName/edit/:documentId', {
+  action: function(params) {
+   BlazeLayout.render('main', {header: 'mongoHeaderLayout', body: 'mongoEditor'});
+  },
+  name: 'editCollection'
+});
+

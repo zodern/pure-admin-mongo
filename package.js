@@ -13,13 +13,14 @@ Package.describe({
 Package.onUse(function (api) {
   api.versionsFrom('1.2.0.2');
   api.use('zodern:pure-admin');
-  api.use('ecmascript');
+  api.use(['ecmascript', 'check']);
   api.use('dburles:mongo-collection-instances@0.3.4');
   var serverFiles = [
     'lib.js',
     'detectCollections.js',
     'publish.js',
-    'pureadmin-mongo.js'
+    'pureadmin-mongo.js',
+    'save.js'
   ];
   var assets = [
     'client/menu_and_routing.js',
@@ -27,6 +28,7 @@ Package.onUse(function (api) {
     'client/views/body_header.html',
     'client/views/views.js',
     'client/views/document.html',
+    'client/views/editor.html',
     'style.css'
   ];
 

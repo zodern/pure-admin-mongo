@@ -1,5 +1,5 @@
 console.log('body.js');
-var collection = new Meteor.Collection();
+var collection = new Meteor.Collection(null);
 Template.mongoBodyLayout.onCreated(function () {
   var self = this;
   Tracker.autorun(function () {
@@ -56,7 +56,77 @@ Template.mongoDocument.events({
     console.log('will collapse');
     Template.instance().collapsed.set(!Template.instance().collapsed.get());
   },
-  'click .edit-document': function () {
-
+  'click .edit-document': function (e, t) {
+    var collection = FlowRouter.getParam('collectionName');
+    var id = t.data._id;
+    console.log(collection, id);
+    FlowRouter.go('editCollection', {
+      collectionName: collection,
+      documentId: id
+    });
   }
 });
+
+// editor
+Template.mongoEditor.onCreated(function () {
+  this.subscribe('mongoDocument', {
+    collection: FlowRouter.getParam('collectionName'),
+    id: FlowRouter.getParam('documentId')
+  });
+  try {
+    collection = new Meteor.Collection(FlowRouter.getParam('collectionName'));
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+Template.mongoEditor.helpers({
+  json: function () {
+    return JSON.stringify(collection.findOne({_id: FlowRouter.getParam('documentId')}), null, 2);
+  }
+});
+
+Template.mongoEditor.events({
+  'click .diff': function (e, t) {
+    //TODO: do this whenever the textarea changes
+    var existing = collection.findOne({_id: FlowRouter.getParam('documentId')});
+    try {
+      var edited = JSON.parse(t.$('textarea').val());
+    } catch (e) {
+      //TODO: try to find where in the JSON the format is wrong
+      // to give a better error message
+      alert('Error parsing JSON');
+      return;
+    }
+    var delta = jsondiffpatch.diff(existing, edited);
+    console.log(delta);
+    if(typeof delta === "undefined") {
+      t.$('.view').html('<pre>' + JSON.stringify(edited, null, 2) + '</pre>');
+    } else {
+      //console.log(jsondiffpatch.formatters.html.format(delta, existing));
+      t.$('.view').html(jsondiffpatch.formatters.html.format(delta, existing));
+      jsondiffpatch.formatters.html.showUnchanged();
+    }
+
+  },
+  'click .format': function (e, t) {
+    alert('will format');
+  },
+  'click #save': function (e, t) {
+    var json = t.$('textarea').val();
+    try{
+      json = JSON.parse(json);
+    } catch (e) {
+      alert('Error parsing JSON');
+    }
+    Meteor.call('_pa.Mongo.save', {
+      collection: FlowRouter.getParam('collectionName'),
+      document: FlowRouter.getParam('documentId'),
+      json: json
+    }, function (e, d){
+      console.log(e, d);
+    });
+  }
+});
+
+
