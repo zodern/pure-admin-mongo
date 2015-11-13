@@ -26,7 +26,7 @@ Meteor.startup(function () {
   //console.log(Mongo.Collection.getAll());
   var names = Mongo.Collection.getAll();
   names.forEach((item) => {
-      if(blackList.indexOf(item.name) === -1) {
+      if(blackList.indexOf(item.name) === -1 && item.name) {
         PAMongo.collectionNames.push(item.name);
       }
     });
