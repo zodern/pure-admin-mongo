@@ -69,7 +69,7 @@ Template.mongoDocument.events({
 
 // editor
 Template.mongoEditor.onCreated(function () {
-  this.subscribe('mongoDocument', {
+  this.subscribe('_pa.Mongo.document', {
     collection: FlowRouter.getParam('collectionName'),
     id: FlowRouter.getParam('documentId')
   });
