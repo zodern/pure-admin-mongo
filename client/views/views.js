@@ -1,11 +1,22 @@
 console.log('body.js');
-var collection = new Meteor.Collection(null);
+var collections = {
+  users: Meteor.users
+};
+
 Template.mongoBodyLayout.onCreated(function () {
   var self = this;
+  this.collectionAvailable = new ReactiveVar();
+
   Tracker.autorun(function () {
     try {
-      self.subscribe('_pa.Mongo.collection', FlowRouter.getParam('collectionName'));
-      collection = new Mongo.Collection(FlowRouter.getParam('collectionName'));
+      var collectionName = FlowRouter.getParam('collectionName');
+      self.subscribe('_pa.Mongo.collection', collectionName);
+
+      if (!(collectionName in collections)) {
+        collections[collectionName] = new Mongo.Collection(collectionName);
+      }
+
+      self.collectionAvailable.set(collectionName)
     } catch (e) {
 
     }
@@ -14,6 +25,14 @@ Template.mongoBodyLayout.onCreated(function () {
 
 Template.mongoBodyLayout.helpers({
   data: function () {
+    var collectionName = Template.instance().collectionAvailable.get();
+    const collection = collections[collectionName];
+
+    if (!collection) {
+      console.log('no collection')
+      return []
+    }
+
     console.log(collection.find().fetch());
     return collection.find();
   },
@@ -58,10 +77,11 @@ Template.mongoDocument.events({
     Template.instance().collapsed.set(!Template.instance().collapsed.get());
   },
   'click .edit-document': function (e, t) {
-    var collection = FlowRouter.getParam('collectionName');
+    var collectionName = FlowRouter.getParam('collectionName');
     var id = t.data._id;
+
     FlowRouter.go('editCollection', {
-      collectionName: collection,
+      collectionName: collectionName,
       documentId: id
     });
   }
@@ -69,25 +89,36 @@ Template.mongoDocument.events({
 
 // editor
 Template.mongoEditor.onCreated(function () {
+  var collectionName = FlowRouter.getParam('collectionName');
+
   this.subscribe('_pa.Mongo.document', {
-    collection: FlowRouter.getParam('collectionName'),
+    collection: collectionName,
     id: FlowRouter.getParam('documentId')
   });
+
   try {
-    collection = new Meteor.Collection(FlowRouter.getParam('collectionName'));
+    if (!(collectionName in collections)) {
+      collections[collectionName] = new Meteor.Collection(collectionName);
+    }
   } catch (e) {
     console.log(e);
   }
+
+  this.collection = collections[collectionName]
 });
 
 Template.mongoEditor.helpers({
   json: function () {
+    var collection = Template.instance().collection;
+
     return JSON.stringify(collection.findOne({_id: FlowRouter.getParam('documentId')}), null, 2);
   }
 });
 
 Template.mongoEditor.events({
   'click .diff': function (e, t) {
+    var collection = Template.instance().collection;
+
     //TODO: do this whenever the textarea changes
     var existing = collection.findOne({_id: FlowRouter.getParam('documentId')});
     existing = JSON.parse(JSON.stringify(existing));

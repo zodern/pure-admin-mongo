@@ -4,7 +4,6 @@ var blackList = [
   'meteor_accounts_loginServiceConfiguration',
   '_PureAdmin-Admins',
   'meteor_autoupdate_clientVersions',
-  'users',
   'velocityTestFiles',
   'velocityFixtureFiles',
   'velocityTestReports',
