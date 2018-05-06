@@ -12,29 +12,36 @@
 
 .collapse-document {
     position: relative;
-    bottom: -20px;
-    left: -10px;
     cursor: pointer;
+    padding: 5px;
+    margin: 0 0 0 10px;
 }
 
 .mongo-documents {
     padding: 0 50px;
 }
 
+.mongo-document {
+    display: flex;
+    align-items: flex-start;
+}
+
+.json-view {
+    margin-top: 3px;
+}
+
 .edit-document, .diff {
     position: relative;
-    bottom: -45px;
-    left: -50px;
     cursor: pointer;
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.19);
-    width: 35px;
+    display: inline-block;
 }
 
-.diff {
-    width: 150px;
-    left: 0px;
-    bottom: 0px;
+#save {
+    background-color: rgba(255, 255, 255, 0.19);
+    border: none;
+    padding: 5px;
 }
 
 #mongoEditor {
@@ -66,6 +73,7 @@
     font-size: 14px;
     display: inline-block;
     vertical-align: top;
+    overflow: auto;
 }
 
 /* css for jsondiffpatch */

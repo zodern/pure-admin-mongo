@@ -14,7 +14,6 @@ Template.mongoBodyLayout.onCreated(function () {
 
 Template.mongoBodyLayout.helpers({
   data: function () {
-    //console.log(collection);
     console.log(collection.find().fetch());
     return collection.find();
   },
@@ -36,13 +35,16 @@ Template.mongoDocument.onCreated(function () {
 });
 
 Template.mongoDocument.helpers({
+  document: function() {
+    return JSON.parse(JSON.stringify(this));
+  },
   'collapsed': function () {
     return Template.instance().collapsed.get();
   },
   summary: function () {
     var json = JSON.stringify(this);
     // removes "" around keys
-    json = json.replace(/"(\w+)"\s*:/g, '$1:');
+    json = json.replace(/"(\w+)"\s*:/g, '$1: ');
     // add space after commas
     json = json.replace(/,/g, ', ');
     // remove brackets at start and end
@@ -53,13 +55,11 @@ Template.mongoDocument.helpers({
 
 Template.mongoDocument.events({
   'click .collapse-document': function () {
-    console.log('will collapse');
     Template.instance().collapsed.set(!Template.instance().collapsed.get());
   },
   'click .edit-document': function (e, t) {
     var collection = FlowRouter.getParam('collectionName');
     var id = t.data._id;
-    console.log(collection, id);
     FlowRouter.go('editCollection', {
       collectionName: collection,
       documentId: id
@@ -90,6 +90,7 @@ Template.mongoEditor.events({
   'click .diff': function (e, t) {
     //TODO: do this whenever the textarea changes
     var existing = collection.findOne({_id: FlowRouter.getParam('documentId')});
+    existing = JSON.parse(JSON.stringify(existing));
     try {
       var edited = JSON.parse(t.$('textarea').val());
     } catch (e) {
@@ -101,7 +102,7 @@ Template.mongoEditor.events({
     var delta = jsondiffpatch.diff(existing, edited);
     console.log(delta);
     if(typeof delta === "undefined") {
-      t.$('.view').html('<pre>' + JSON.stringify(edited, null, 2) + '</pre>');
+      t.$('.view').html('<pre>' + JSON.stringify(edited, null, 2) + '</pre><p>No change to document.</p>');
     } else {
       //console.log(jsondiffpatch.formatters.html.format(delta, existing));
       t.$('.view').html(jsondiffpatch.formatters.html.format(delta, existing));
@@ -125,6 +126,11 @@ Template.mongoEditor.events({
       json: json
     }, function (e, d){
       console.log(e, d);
+      if (e) {
+        alert('Error saving. Check the javscript console for details.');
+      } else {
+        alert('Changes saved');
+      }
     });
   }
 });

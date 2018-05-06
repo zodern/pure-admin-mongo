@@ -1,8 +1,10 @@
-{{#if collapsed}}
-  <div class="edit-document">Edit</div>
-  <div class="collapse-document">+ {{summary}}</div>
-{{else}}
-  <div class="edit-document">Edit</div>
-  <div class="collapse-document">-</div>
-  {{> jsonView json=this}}
-{{/if}}
+<div class="mongo-document">
+  {{#if collapsed}}
+    <div class="edit-document">Edit</div>
+    <div class="collapse-document">+ {{summary}}</div>
+  {{else}}
+    <div class="edit-document">Edit</div>
+    <div class="collapse-document">-</div>
+    {{> jsonView json=document}}
+  {{/if}}
+</div>
