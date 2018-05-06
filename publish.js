@@ -1,4 +1,5 @@
 Meteor.publish('_pa.Mongo.collection', function (collectionName) {
+  check(collectionName, String);
   if(PureAdmin.isAdmin(this.userId) === false) {
     return [];
   }
@@ -6,6 +7,7 @@ Meteor.publish('_pa.Mongo.collection', function (collectionName) {
 });
 
 Meteor.publish('_pa.Mongo.document', function (info) {
+  check(info, Object);
   if(PureAdmin.isAdmin(this.userId) === false) {
     return [];
   }
