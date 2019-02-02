@@ -23,7 +23,8 @@ var blackList = [
 Meteor.startup(function () {
   collections = Mongo.Collection.getAll()
     .map(({ name }) => name)
-    .filter(name => name && !blackList.includes(name))
+    // Meteorx creates collections starting with __dummy_coll_
+    .filter(name => name && !blackList.includes(name) && !name.startsWith('__dummy_coll_'))
 });
 
 Meteor.publish('_pa.Mongo.collection', function (collectionName) {

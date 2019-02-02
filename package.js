@@ -8,7 +8,7 @@ Package.describe({
 
 Npm.depends({
   'jsondiffpatch': '0.3.11'
-})
+});
 
 Package.onUse(function (api) {
   api.versionsFrom('1.8.0.2');
