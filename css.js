@@ -1,11 +1,17 @@
 export default `
-  .collapse-document, .mongo-document {
-    display: inline-block;
-    vertical-align: top;
-  }
-
   .mongo-document {
     margin-top: 5px;
+    display: flex;
+    align-items: baseline;
+  }
+
+  .mongo-document pre {
+    max-height: 300px;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  .collapse-document {
+    padding: 0 10px;
   }
 
   #mongoEditor {
@@ -41,7 +47,7 @@ export default `
     overflow: auto;
   }
 
-  /* https://raw.githubusercontent.com/benjamine/jsondiffpatch/master/docs/formatters-styles/html.css */
+  /* From https://raw.githubusercontent.com/benjamine/jsondiffpatch/master/docs/formatters-styles/html.css */
   .jsondiffpatch-delta {
     font-family: 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Courier, monospace;
     font-size: 12px;

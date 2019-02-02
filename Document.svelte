@@ -53,7 +53,7 @@
   <div class="collapse-document" on:click="toggleCollapsed()">+ {summarize(document)}</div>
 {:else}
   <div class="collapse-document" on:click="toggleCollapsed()">-</div>
-  <pre class="mongo-document">
+  <pre>
     {formatJson(document, null, 4)}
   </pre>
 {/if}
