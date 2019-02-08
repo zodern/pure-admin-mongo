@@ -9,5 +9,5 @@ meteor add zodern:pureadmin-mongo
 
 **This is an early version.**
 
-![List](https://raw.githubusercontent.com/zodern/puareadmin-mongo/master/docs/list.png)
-![Editor](https://raw.githubusercontent.com/zodern/puareadmin-mongo/master/docs/editor.png)
+![Collection](./docs/collection.png)
+![Editor](docs/editor.png)
