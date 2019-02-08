@@ -1,6 +1,6 @@
 Package.describe({
   name: 'zodern:pureadmin-mongo',
-  version: '0.0.3',
+  version: '0.1.0',
   summary: 'View and Edit Data from MongoDB in Pure Admin',
   git: 'https://github.com/zodern/puareadmin-mongo.git',
   documentation: 'README.md'
@@ -25,5 +25,4 @@ Package.onTest(function (api) {
   api.use('ecmascript');
   api.use('tinytest');
   api.use('zodern:pureadmin-mongo');
-  api.addFiles('pureadmin-mongo-tests.js');
 });
