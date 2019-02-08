@@ -9,6 +9,7 @@ export default `
     max-height: 300px;
     overflow-y: auto;
     flex-grow: 1;
+    white-space: pre-wrap;
   }
   .collapse-document {
     padding: 0 10px;
@@ -45,6 +46,7 @@ export default `
     box-sizing: border-box;
     font-size: 14px;
     overflow: auto;
+    background-color: #f1f1f1;
   }
 
   /* From https://raw.githubusercontent.com/benjamine/jsondiffpatch/master/docs/formatters-styles/html.css */

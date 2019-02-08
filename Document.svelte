@@ -50,7 +50,7 @@
 
 <button on:click="edit()">Edit</button>
 {#if collapsed}
-  <div class="collapse-document" on:click="toggleCollapsed()">+ {summarize(document)}</div>
+  <pre class="collapse-document" on:click="toggleCollapsed()">+ {summarize(document)}</pre>
 {:else}
   <div class="collapse-document" on:click="toggleCollapsed()">-</div>
   <pre>
