@@ -83,7 +83,7 @@
 <div id="mongoEditor">
   {#if document}
     <div class="mongo-editor-content">
-      <textarea wrap="soft" spellcheck="false" bind:value="document" />
+      <textarea wrap="soft" spellcheck="{false}" bind:value="document" />
       <div class="view" ref:diff></div>
     </div>
     <div>
