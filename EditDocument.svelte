@@ -1,5 +1,6 @@
 <script>
-  var jsondiffpatch = require("jsondiffpatch");
+  import { EJSON } from 'meteor/ejson';
+  import jsondiffpatch from 'jsondiffpatch';
   const processor = jsondiffpatch.create({
     cloneDiffValues: true
   });
@@ -8,7 +9,7 @@
     oncreate() {
       const { props } = this.get();
 
-      this.sub = Meteor.subscribe("_pa.Mongo.document", {
+      this.sub = Meteor.subscribe('_pa.Mongo.document', {
         collection: props.collection,
         id: props.documentId
       });
@@ -49,18 +50,18 @@
         try {
           json = EJSON.parse(document);
         } catch (e) {
-          alert("Unable to parse document. Make sure it is valid json.");
+          alert('Unable to parse document. Make sure it is valid json.');
         }
 
         const shouldContinue = confirm(
-          "Are you sure you want to save your edits?"
+          'Are you sure you want to save your edits?'
         );
         if (!shouldContinue) {
           return;
         }
 
         Meteor.call(
-          "_pa.Mongo.save",
+          '_pa.Mongo.save',
           {
             collection: props.collection,
             documentId: props.documentId,
@@ -69,9 +70,9 @@
           (e, d) => {
             console.log(e, d);
             if (e) {
-              alert("Error saving. Check the javscript console for details.");
+              alert('Error saving. Check the javscript console for details.');
             } else {
-              alert("Changes saved");
+              alert('Changes saved');
             }
           }
         );

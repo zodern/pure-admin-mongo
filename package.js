@@ -13,7 +13,7 @@ Npm.depends({
 Package.onUse(function (api) {
   api.versionsFrom('1.8.0.2');
   api.use('zodern:pure-admin@0.5.0');
-  api.use(['ecmascript', 'check', 'dynamic-import']);
+  api.use(['ecmascript', 'check', 'dynamic-import', 'ejson']);
   api.use('dburles:mongo-collection-instances@0.3.4');
   api.use('svelte:compiler@2.15.3_1');
 
