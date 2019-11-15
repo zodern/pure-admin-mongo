@@ -1,36 +1,26 @@
 <script>
   import Document from "./Document.svelte";
+  import { onDestroy } from 'svelte';
 
-  export default {
-    data() {
-      return {
-        documents: []
-      };
-    },
-    components: {
-      Document
-    },
-    oncreate() {
-      const { props } = this.get();
+  export let collection;
 
-      this.sub = Meteor.subscribe("_pa.Mongo.collection", props.collection);
-      this.autorun = Tracker.autorun(() => {
-        this.set({
-          documents: Mongo.Collection.get(props.collection)
-            .find()
-            .fetch()
-        });
-      });
-    },
-    ondestroy() {
-      this.sub.stop();
-      this.autorun.stop();
-    }
-  };
+  let documents;
+  let sub = Meteor.subscribe("_pa.Mongo.collection", collection)
+
+  let autorun = Tracker.autorun(() => {
+    documents = Mongo.Collection.get(collection)
+      .find()
+      .fetch();
+  });
+
+  onDestroy(() => {
+    autorun.stop();
+    sub.stop();
+  });
 </script>
 
-{#each documents as document}
+{#each documents as doc, index}
   <div class="mongo-document">
-    <Document on:goTo {document} collection={props.collection} />
+    <Document on:goTo document={doc} collection={collection} />
   </div>
 {/each}
