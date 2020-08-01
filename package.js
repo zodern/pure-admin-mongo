@@ -15,7 +15,7 @@ Package.onUse(function (api) {
   api.use('zodern:pure-admin@0.5.0');
   api.use(['ecmascript', 'check', 'dynamic-import', 'ejson']);
   api.use('dburles:mongo-collection-instances@0.3.4');
-  api.use('svelte:compiler@3.6.7_1');
+  api.use('svelte:compiler@3.6.7_1||4.0.0-beta');
 
   api.mainModule('./main.js', 'client');
   api.mainModule('./server.js', 'server');
