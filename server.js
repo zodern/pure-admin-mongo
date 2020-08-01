@@ -38,19 +38,6 @@ Meteor.publish('_pa.Mongo.collection', function (collectionName) {
   return Mongo.Collection.get(collectionName).find();
 });
 
-Meteor.publish('_pa.Mongo.document', function (info) {
-  check(info, {
-    collection: String,
-    id: String
-  });
-
-  if(!PureAdmin.isAdmin(this.userId)) {
-    return [];
-  }
-
-  return Mongo.Collection.get(info.collection).find({_id: info.id});
-});
-
 Meteor.methods({
   '_pa.mongo.collectionNames': function () {
     if(!PureAdmin.isAdmin(this.userId)) {
@@ -58,6 +45,16 @@ Meteor.methods({
     }
 
     return collections;
+  },
+  '_pa.Mongo.document': function (collection, id) {
+    if (!PureAdmin.isAdmin(this.userId)) {
+      throw new Meteor.Error('not-admin');
+    }
+
+    check(collection, String);
+    check(id, String);
+
+    return Mongo.Collection.get(collection).findOne({_id: id})
   },
   '_pa.Mongo.save': function (data) {
    if(!PureAdmin.isAdmin(this.userId)) {

@@ -1,7 +1,7 @@
 <script>
   import { EJSON } from "meteor/ejson";
   import jsondiffpatch from "jsondiffpatch";
-  import { onDestroy } from "svelte";
+  import { onMount } from "svelte";
 
   const processor = jsondiffpatch.create({
     cloneDiffValues: true
@@ -10,18 +10,18 @@
   export let collection;
   export let documentId;
 
-  let sub = Meteor.subscribe("_pa.Mongo.document", {
-    collection,
-    id: documentId
-  });
-  let diffRef;
   let doc;
+  let diffRef;
   let origionalDocument;
-  let autorun = Tracker.autorun(() => {
-    origionalDocument = Mongo.Collection.get(collection).findOne({
-      _id: documentId
+
+  onMount(() => {
+    Meteor.call('_pa.Mongo.document', collection, documentId, (err, result) => {
+      if (err) {
+        return alert(`Error loading document: ${err}`);
+      }
+      origionalDocument = result;
+      doc = EJSON.stringify(result, { indent: true });
     });
-    doc = EJSON.stringify(origionalDocument, { indent: true });
   });
 
   function diff() {
@@ -68,11 +68,6 @@
       }
     );
   }
-
-  onDestroy(() => {
-    sub.stop();
-    autorun.stop();
-  });
 </script>
 
 <div id="mongoEditor">
