@@ -69,9 +69,15 @@ Meteor.methods({
   
     var collection = Mongo.Collection.get(data.collection);
     var document = collection.findOne({_id: data.documentId});
-    console.log("replacing document");
-    console.log(data);
-    console.log(document);
+    console.log('------------------');
+    console.log('Replacing document');
+    console.log('New document:')
+    console.dir(data.json, { depth: 10 });
+    console.log('');
+    console.log('');
+    console.log('Old document:')
+    console.dir(document, { depth: 10 });
+    console.log('------------------');
 
     collection.update({_id: data.documentId}, data.json, {replace: true});
   }
