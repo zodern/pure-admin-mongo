@@ -12,26 +12,26 @@
 
   let doc;
   let diffRef;
-  let origionalDocument;
+  let originalDocument;
 
   onMount(() => {
     Meteor.call('_pa.Mongo.document', collection, documentId, (err, result) => {
       if (err) {
         return alert(`Error loading document: ${err}`);
       }
-      origionalDocument = result;
+      originalDocument = result;
       doc = EJSON.stringify(result, { indent: true });
     });
   });
 
   function diff() {
     const editing = EJSON.parse(doc);
-    const delta = processor.diff(origionalDocument, editing);
+    const delta = processor.diff(originalDocument, editing);
 
     if (delta) {
       diffRef.innerHTML = jsondiffpatch.formatters.html.format(
         delta,
-        origionalDocument
+        originalDocument
       );
       jsondiffpatch.formatters.html.showUnchanged();
     } else {
