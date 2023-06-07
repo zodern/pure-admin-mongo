@@ -45,6 +45,7 @@
       json = EJSON.parse(doc);
     } catch (e) {
       alert("Unable to parse document. Make sure it is valid json.");
+      return;
     }
 
     const shouldContinue = confirm("Are you sure you want to save your edits?");
